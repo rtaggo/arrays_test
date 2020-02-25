@@ -5,9 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <link rel='stylesheet' type='text/css' href='/styles/slds/assets/styles/salesforce-lightning-design-system.css' />
+
+  <style>
+    html {
+      background: white;
+    }
+    .svg-container {
+      display: flex;
+      align-items: center;
+      
+      height: 480px;  
+      border: 1px solid lightgray;
+    }
+
+    .svg-chart {
+      margin: 0 auto;
+      display: block;
+    }
+
+  </style>
 </head>
 <body>
+  <div id="appContainer" class="slds slds-p-around_small">
+    <div class="slds-grid slds-wrap">
+      <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small"> 
+        <div id="chart-div1"  class="svg-container" >
+        </div>
+      </div>
+      <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small"> 
+        <div id="chart-div2"  class="svg-container" >
+        </div>
+      </div>
+      <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small"> 
+        <div id="chart-div3"  class="svg-container" >
+        </div>
+      </div>
   
+
+    </div>
+  </div>
 </body>
-<script type="module" src="src/index.mjs"></script>
+
+<script src='/src/vendors/jquery/jquery-3.3.1.min.js'></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script type="module" src="src/chart.mjs"></script>
 </html>
