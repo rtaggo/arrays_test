@@ -1,0 +1,113 @@
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+<head>
+  <title>Test Geolocation </title>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no" />
+
+  <script src='/src/vendors/jquery/jquery-3.3.1.min.js'></script>
+  <link rel='stylesheet' type='text/css' href='/styles/slds/assets/styles/salesforce-lightning-design-system.css' />
+
+  <!-- Import the Design System style sheet -->
+  <apex:slds />
+
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0px !important;
+      padding: 0px !important;
+    }
+    body {
+      overflow: hidden;
+      margin: 0px !important;
+      padding: 0px !important;
+    }
+
+    .noSidebarCell, .sidebarCell .fixed {
+        padding: 0px !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="mainUIDiv" class="slds-scope">
+    <div class="slds-grid slds-p-around_small">
+      <div class="slds-col slds-size-1_of_2">
+        <buttton id="locateMeBtn" class="slds-button slds-button_neutral">Locate Me! </buttton>
+      </div>
+      <div id="locationResultDiv" class="slds-col slds-size-1_of_2">
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    let self = this;
+    const getUserLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          let pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+          $('#locationResultDiv').empty().append(`
+          <div class="slds-notify_container slds-is-relative">
+            <div class="slds-notify slds-notify_toast slds-theme_sucess" role="status">
+              <span class="slds-assistive-text">check</span>
+              <span class="slds-icon_container slds-icon-utility-checl slds-m-right_small slds-no-flex slds-align-top" title="Description of icon when needed">
+                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                  <use xlink:href="'assets/icons/utility-sprite/svg/symbols.svg#check'"></use>
+                </svg>
+              </span>
+              <div class="slds-notify__content">
+                <h2 class="slds-text-heading_small">Your location:</h2>
+                <ul>
+                  <li>Latitude: ${pos.lat}</li>
+                  <li>Longitude: ${pos.lng}</li>
+                </ul> 
+              </div>
+            </div>
+          </div>
+          `);
+        }, function(errLocation) {
+          handleLocationError(true, errLocation);
+        });
+      } else {
+        handleLocationError(false);
+      }
+    };
+    const handleLocationError = (browserHasGeolocation, err) => {
+      const msg = (browserHasGeolocation ?
+                  'Error: The Geolocation service failed.' :
+                  'Error: Your browser doesn\'t support geolocation.');
+      const details = err ? `<p>${err.message}</p>` : '';
+      $('#locationResultDiv').empty().append(`
+        <div class="slds-notify_container slds-is-relative">
+          <div class="slds-notify slds-notify_toast slds-theme_error" role="status">
+            <span class="slds-assistive-text">error</span>
+            <span class="slds-icon_container slds-icon-utility-error slds-m-right_small slds-no-flex slds-align-top" title="Description of icon when needed">
+              <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                  <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#error')}"></use>
+              </svg>
+            </span>
+            <div class="slds-notify__content">
+              <h2 class="slds-text-heading_small">Unable to find your location:</h2>
+              <p>${msg}</p>
+              ${details}
+            </div>
+          </div>
+        </div>
+
+      `);
+    };
+
+    $(document).ready(e => {
+      console.log('Document is ready');
+      $('#locateMeBtn').click(e => {
+        getUserLocation();  
+      })
+      getUserLocation();
+    });
+  </script>
+</body>
+</html>
