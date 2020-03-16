@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel='stylesheet' type='text/css' href='/styles/slds/assets/styles/salesforce-lightning-design-system.css' />
+
+  <style>
+    html {
+      background: white;
+    }
+    .svg-container {
+      display: flex;
+      align-items: center;
+      
+      height: 480px;  
+      border: 1px solid lightgray;
+    }
+
+    .svg-chart {
+      margin: 0 auto;
+      display: block;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="appContainer" class="slds slds-p-around_small">
+    <div class="slds-grid slds-wrap">
+      <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small"> 
+        <div style="width: 100%;height:32px;position: relative;border: 1px solid;/* padding: 1px; */">
+          <div style="width: 50%;background-color: red;border-radius: 5px;position: absolute;vertical-align: middle;height: 100%;line-height: normal;">
+            <div style="line-height: normal;padding-left: 10px;margin: auto;">20 00</div>
+        </div>
+          <span style="border-left: 2px dashed #aaaaaa;left: 70%;width:2px;height: 100%;position: absolute;"></span>
+          <span style="border-left: 2px solid orange;left: 75%;width:2px;height: 100%;position: absolute;"></span>
+          <span style="border-left: 2px dashed #aaaaaa;left: 80%;width:2px;height: 100%;position: absolute;"></span>
+
+        </div>
+      </div>
+      <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small"> 
+      </div>
+      <div class="slds-col slds-size_4-of-12 slds-p-around_xx-small"> 
+      </div>
+  
+
+    </div>
+  </div>
+</body>
+
+<script src='/src/vendors/jquery/jquery-3.3.1.min.js'></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+</html>
